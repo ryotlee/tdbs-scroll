@@ -115,36 +115,8 @@ export default {
 
 <style>
 @import url(./assets/css/reset.css);
-/*设置IOS页面长按不可复制粘贴，但是IOS上出现input、textarea不能输入，因此将使用-webkit-user-select:auto;*/
-* {
-    -webkit-touch-callout: none; /*系统默认菜单被禁用*/
-    -webkit-user-select: none; /*webkit浏览器*/
-    -khtml-user-select: none; /*早期浏览器*/
-    -moz-user-select: none; /*火狐*/
-    -ms-user-select: none; /*IE10*/
-    user-select: none;
-}
-input,
-textarea {
-    -webkit-user-select: auto; /*webkit浏览器*/
-    margin: 0px;
-    padding: 0px;
-    outline: none;
-}
-* {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-tap-highlight-color: transparent; /* For some Androids */
-}
-
-html {
-    overflow: hidden;
-}
 </style>
 <style lang="stylus" scoped>
-#app
-    height: 100vh
-    overflow: hidden
-    width: 100%
 .btab
     background-color: #999
     display: inline-block

@@ -1,37 +1,39 @@
 <template>
-    <div class="pull-scroller">
-        <div ref="scroll" class="pull-wrapper">
-            <div class="pull-content">
-                <!-- 下拉刷新 -->
-                <div class="pulldown-wrapper">
-                    <template v-if="beforePullDown">
-                        <div class="dou"></div>
-                        <div class="lbl">
-                            <p>下拉刷新</p>
-                            <p>精彩马上呈现</p>
-                        </div>
-                    </template>
-                    <template v-else>
-                        <div class="dou anim"></div>
-                        <div class="lbl">
-                            <p v-show="isPullingDown">刷新中...</p>
-                            <p v-show="!isPullingDown">刷新完成</p>
-                            <p>精彩马上呈现</p>
-                        </div>
-                    </template>
-                </div>
-                <!-- content -->
-                <div class="pull-body">
-                    <slot name="content"> </slot>
-                </div>
-
-                <!-- 上拉加载 -->
-                <div v-show="hasMore" class="pullup-tips">
-                    <div v-if="!isPullUpLoad" class="before-trigger">
-                        <span class="pullup-txt">上拉加载更多</span>
+    <div class="scroll-container">
+        <div class="pull-scroller">
+            <div ref="scroll" class="pull-wrapper">
+                <div class="pull-content">
+                    <!-- 下拉刷新 -->
+                    <div class="pulldown-wrapper">
+                        <template v-if="beforePullDown">
+                            <div class="dou"></div>
+                            <div class="lbl">
+                                <p>下拉刷新</p>
+                                <p>精彩马上呈现</p>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="dou anim"></div>
+                            <div class="lbl">
+                                <p v-show="isPullingDown">刷新中...</p>
+                                <p v-show="!isPullingDown">刷新完成</p>
+                                <p>精彩马上呈现</p>
+                            </div>
+                        </template>
                     </div>
-                    <div v-else-if="isPullingUp" class="after-trigger">
-                        <span class="pullup-txt">加载中...</span>
+                    <!-- content -->
+                    <div class="pull-body">
+                        <slot name="content"> </slot>
+                    </div>
+
+                    <!-- 上拉加载 -->
+                    <div v-show="hasMore" class="pullup-tips">
+                        <div v-if="!isPullUpLoad" class="before-trigger">
+                            <span class="pullup-txt">上拉加载更多</span>
+                        </div>
+                        <div v-else-if="isPullingUp" class="after-trigger">
+                            <span class="pullup-txt">加载中...</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,7 +127,7 @@ export default {
         async pullingUpHandler () {
             this.isPullUpLoad = true
             this.isPullingUp = true
-             this.hasMore = true
+            this.hasMore = true
             // 刷新数据
             this.$emit('pullUp', this.finishePullUp)
         },
@@ -148,10 +150,27 @@ export default {
 }
 </script>
 
+<style>
+html {
+    overflow: hidden;
+}
+* {
+    -webkit-touch-callout: none; /*系统默认菜单被禁用*/
+    -webkit-user-select: none; /*webkit浏览器*/
+    -khtml-user-select: none; /*早期浏览器*/
+    -moz-user-select: none; /*火狐*/
+    -ms-user-select: none; /*IE10*/
+    user-select: none;
+}
+</style>
+
 <style lang="stylus" scoped>
+.scroll-container
+    height: 100vh
+    overflow: hidden
+    width: 100%
 .pull-scroller
-    border: 1px solid transparent
-    height: 100%
+    height: 100vh
     position: relative
     .pull-wrapper
         height: 100%
@@ -185,8 +204,8 @@ export default {
                 text-align: left
     .pullup-tips
         color: #999
-        padding: 20px
         font-size: 0.28rem
+        padding: 20px
         text-align: center
     .pull-body
         overflow: hidden
